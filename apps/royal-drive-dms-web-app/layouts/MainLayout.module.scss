@@ -1,0 +1,51 @@
+.appBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 10px;
+    gap: 5px;
+    padding: 0 10px;
+
+    :nth-child(1) {
+        justify-self: left;
+    }
+
+    :nth-child(2) {
+        // justify-self: center;
+        justify-self: right;
+    }
+
+    // :nth-child(3) {
+    //     justify-self: right;
+    // }
+}
+
+.navLinkButtons {
+    height: min-content;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.largeScreen {
+    display: flex;
+}
+
+.smallScreen {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .largeScreen {
+        display: none;
+    }
+
+    .smallScreen {
+        display: flex;
+    }
+
+    .navLinkButtons {
+        display: flex;
+        flex-direction: column;
+    }
+}

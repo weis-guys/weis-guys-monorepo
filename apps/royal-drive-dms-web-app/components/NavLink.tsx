@@ -8,6 +8,7 @@ type NavLinkProps = {
     children?: any
     className?: string
     classNames?: string[]
+    onClick?: () => void
 }
 
 export const NavLink: FC<NavLinkProps> = ( { href, exact = true, children, classNames = [], ...props } ) => {
