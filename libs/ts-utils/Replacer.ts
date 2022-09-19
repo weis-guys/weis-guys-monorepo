@@ -1,0 +1,1 @@
+export type Replacer = ( key: string, value: any ) => any

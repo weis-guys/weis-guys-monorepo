@@ -1,0 +1,31 @@
+* {
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .2);
+    }
+
+    &.active {
+        cursor: default;
+        pointer-events: none;
+        background-color: rgba(255, 255, 255, .2);
+    }
+}
+
+.flex-spacer {
+    flex-grow: 1;
+}

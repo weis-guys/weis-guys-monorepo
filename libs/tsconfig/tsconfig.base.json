@@ -1,0 +1,42 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Default",
+    "compilerOptions": {
+        "paths": {
+            "@weis-guys/*": [
+                "../libs/*"
+            ]
+        },
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "ESNext"
+        ],
+        "module": "ESNext",
+        "target": "ESNext",
+        "jsx": "preserve",
+        "composite": false,
+        "declaration": true,
+        "declarationMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "inlineSources": false,
+        "isolatedModules": true,
+        "strictNullChecks": true,
+        "noImplicitAny": false,
+        "moduleResolution": "node",
+        "preserveWatchOutput": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "allowJs": true,
+        "noEmit": true,
+        "incremental": true,
+        "resolveJsonModule": true
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

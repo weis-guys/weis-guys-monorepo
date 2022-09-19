@@ -1,0 +1,11 @@
+{
+    "extends": "@weis-guys/tsconfig/tsconfig.reactjs.json",
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "dist",
+        "build",
+        "node_modules"
+    ]
+}

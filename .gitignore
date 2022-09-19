@@ -1,0 +1,24 @@
+workspace-links*
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+*.log*
+
+# env files
+*.env
+
+# turbo
+.turbo

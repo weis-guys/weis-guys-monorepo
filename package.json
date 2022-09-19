@@ -1,0 +1,37 @@
+{
+    "name": "@weis-guys/monorepo",
+    "version": "0.0.0",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "libs/*"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "build.graph.all": "turbo run build --graph=my-graph.pdf",
+        "build.graph.dms-web-app": "turbo run build --filter=*dms-web-app --graph=dms-web-app-deps-graph.pdf",
+        "update-dep-refs": "rm -rf node_modules && yarn",
+        "dev": "turbo run dev --parallel"
+    },
+    "links": [
+        {
+            "description": "View turbo dependency graph",
+            "url": "https://dreampuf.github.io/GraphvizOnline"
+        }
+    ],
+    "dependencies": {
+        "@js-temporal/polyfill": "^0.4.2",
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "sass": "^1.54.9",
+        "@types/lodash": "^4.14.184",
+        "@types/node": "^17.0.12",
+        "@types/react": "18.0.17",
+        "turbo": "1.4.6"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "packageManager": "yarn@1.22.18"
+}
