@@ -7,14 +7,17 @@
     gap: 5px;
 }
 
-.largeScreen {
-    display: flex;
-    gap: 5px;
+.lg {
+    display: flex !important;
+    place-items: center;
 }
 
-.smallScreen {
-    display: none;
-    gap: 5px;
+.md {
+    display: none !important;
+}
+
+.sm {
+    display: none !important;
 }
 
 .navLinkButtons {
@@ -24,26 +27,57 @@
     gap: 5px;
 }
 
-@media (max-width: 600px) {
+.AppBar_NavLinkButtons {
+    flex-direction: row;
+}
+
+.SideNav_NavLinkButtons {
+    flex-direction: column;
+}
+
+.SideNav {
+    display: none;
+    float: left;
+}
+
+/* md */
+@media (max-width: 700px) {
     .appBarContainer {
         grid-template-columns: max-content 1fr;
         padding: 0 5px;
     }
 
-    .largeScreen {
-        display: none;
+    .SideNav {
+        display: block;
     }
 
-    .Profile {
-        display: none;
+    .lg {
+        display: none !important;
     }
 
-    .smallScreen {
-        display: flex;
+    .md {
+        display: flex !important;
+        place-items: center;
     }
 
-    .navLinkButtons {
-        display: flex;
-        flex-direction: column;
+    // .sm {
+    //     display: none !important;
+    // }
+}
+
+/* sm */
+@media (max-width: 400px) {
+
+    .lg {
+        display: none !important;
+    }
+
+    .md {
+        display: none !important;
+    }
+
+    .sm {
+        display: flex !important;
+        place-items: center;
     }
 }

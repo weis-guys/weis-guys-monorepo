@@ -1,27 +1,34 @@
 import { getDefaultPageTitle } from '../lib/getDefaultPageTitle'
-import { ENV } from './ENV'
 
-const navLinkConfigs: Record<string, Omit<NavLink, 'href'>> = {
-    '/car-list': {},
-    '/profit-calculator': {},
-    '/reporting': {},
-    // '/test': {
-    //     hide: ENV.isProd,
-    // },
-    // '/user-list': {
-    //     hide: ENV.isProd,
-    // },
-    // '/api': {
-    //     title: 'API',
-    //     hide: ENV.isProd,
-    // },
-}
-
-type NavLink = {
-    href: string
+type Config = {
     title?: string
     hide?: boolean
+    showInAppBar?: 'md' | 'lg'
+    matIcon?: string
 }
+
+const navLinkConfigs: Record<string, Config> = {
+    // '/car-details': {
+    //     matIcon: 'directions_car',
+    // },
+    '/car-list': {
+        matIcon: 'view_list',
+        showInAppBar: 'md',
+    },
+    '/profit-calculator': {
+        matIcon: 'calculate',
+        showInAppBar: 'lg',
+    },
+    '/reporting': {
+        matIcon: 'assessment',
+        showInAppBar: 'lg',
+    },
+    '/profile': {
+        matIcon: 'account_circle',
+    },
+}
+
+type NavLink = Config & { href: string }
 
 export const NAV_LINKS: NavLink[] = Object.entries( navLinkConfigs )
     .map( ( [ href, config ] ) => ( {
