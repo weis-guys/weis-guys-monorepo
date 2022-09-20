@@ -5,6 +5,9 @@ const navLinkConfigs: Record<string, Omit<NavLink, 'href'>> = {
     '/car-list': {},
     '/profit-calculator': {},
     '/reporting': {},
+    // '/test': {
+    //     hide: ENV.isProd,
+    // },
     // '/user-list': {
     //     hide: ENV.isProd,
     // },

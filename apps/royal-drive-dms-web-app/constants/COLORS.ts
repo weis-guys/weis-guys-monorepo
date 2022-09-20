@@ -2,6 +2,8 @@ export const COLORS = {
     textColorPrimary: '#FFFFFF',
 
     colorPrimary: '#1565C0',
+    colorPrimaryDarker: '#05458f',
+    colorPrimaryLighter: '#3381da',
 
     logoColorPrimary: '#4FB5F3',
     logoColorSecondary: '#FFFFFF',

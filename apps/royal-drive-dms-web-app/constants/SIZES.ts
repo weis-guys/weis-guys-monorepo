@@ -3,7 +3,7 @@ import { makeCSSProperties } from '../lib/makeCSSProperties'
 export const SIZES = {
 
     appBar: makeCSSProperties( {
-        height: 40,
+        height: 50,
     } as const ),
 
     pageArea: makeCSSProperties( {

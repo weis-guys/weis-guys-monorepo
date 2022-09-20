@@ -1,7 +1,7 @@
 import { MainLayout } from '../layouts/MainLayout'
 
-export default MainLayout( props => {
+export default MainLayout( _props => {
     return <>
-        {props.pageTitle}
+        Profile
     </>
 } )

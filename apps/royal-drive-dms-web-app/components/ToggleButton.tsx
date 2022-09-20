@@ -7,7 +7,7 @@ export const ToggleButton: FC<{
 }> = ( { active, toggle, icon } ) => {
 
     const className = [
-        'menuButton btn primary icon',
+        'btn primary icon',
         active ? 'active' : '',
     ].filter( Boolean ).join( ' ' )
 
