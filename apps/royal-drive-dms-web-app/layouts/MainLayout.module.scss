@@ -1,6 +1,6 @@
 .appBarContainer {
     display: grid;
-    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 600px) minmax(max-content, 1fr);
     align-items: center;
     width: 100%;
     padding: 0 10px;
@@ -9,10 +9,12 @@
 
 .largeScreen {
     display: flex;
+    gap: 5px;
 }
 
 .smallScreen {
     display: none;
+    gap: 5px;
 }
 
 .navLinkButtons {
@@ -22,13 +24,17 @@
     gap: 5px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 600px) {
     .appBarContainer {
-        grid-template-columns: max-content 1fr max-content;
-        gap: 10px;
+        grid-template-columns: max-content 1fr;
+        padding: 0 5px;
     }
 
     .largeScreen {
+        display: none;
+    }
+
+    .Profile {
         display: none;
     }
 

@@ -94,7 +94,7 @@ const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
 }
 
 const Profile: FC<{ style: CSSProperties }> = ( { style } ) => {
-    return <div className='Profile' style={style}>
+    return <div className={styles.Profile} style={style}>
         <NavLinkButton className='btn primary icon circle' href='/profile'>
             <span className='material-symbols-outlined'>account_circle</span>
         </NavLinkButton>
@@ -107,6 +107,7 @@ const Nav: FC<{ style: CSSProperties }> = ( { style } ) => {
     return <nav style={style}>
 
         <div className={styles.largeScreen}>
+            {/* <ToggleButton active={false} toggle={() => { }} icon='menu' /> */}
             <NavLinkButtons onClick={close} />
         </div>
 
