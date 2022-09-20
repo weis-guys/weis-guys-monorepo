@@ -213,3 +213,13 @@ const NavLinkButtons: FC<{
             } )}
     </div>
 }
+
+
+
+
+/* 
+TODO
+fix problems with links showing/hiding on the wrong screen sizes
+*/
+
+
