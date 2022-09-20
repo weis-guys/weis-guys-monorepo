@@ -76,6 +76,8 @@ const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
     const [ search, searchSet ] = useState( '' )
     // const [ search, searchSet ] = useState( 'hello how are you?' )
 
+    // TODO make search history/results popup under search bar
+
     return <input className='Search' type='text' placeholder='Search'
         value={search}
         onChange={e => searchSet( e.target.value )}

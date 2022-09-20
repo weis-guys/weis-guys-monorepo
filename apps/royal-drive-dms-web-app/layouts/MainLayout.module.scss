@@ -1,6 +1,5 @@
 .appBarContainer {
     display: grid;
-    // grid-template-columns: 1fr 1fr 1fr;
     grid-template-columns: 2fr 3fr 2fr;
     align-items: center;
     width: 100%;
@@ -22,16 +21,6 @@
     flex-direction: row;
     gap: 5px;
 }
-
-// .MainLayout {}
-
-// @media (max-width: 900px) {
-//     .MainLayout {
-//         a {
-//             font-size: .75rem;
-//         }
-//     }
-// }
 
 @media (max-width: 900px) {
     .appBarContainer {
