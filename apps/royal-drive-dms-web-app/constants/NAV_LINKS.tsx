@@ -5,13 +5,16 @@ const navLinkConfigs: Record<string, Omit<NavLink, 'href'>> = {
     '/car-list': {},
     '/profit-calculator': {},
     '/reporting': {},
-    '/user-list': {
-        hide: ENV.isProd,
-    },
-    '/api': {
-        title: 'API',
-        hide: ENV.isProd,
-    },
+    // '/test': {
+    //     hide: ENV.isProd,
+    // },
+    // '/user-list': {
+    //     hide: ENV.isProd,
+    // },
+    // '/api': {
+    //     title: 'API',
+    //     hide: ENV.isProd,
+    // },
 }
 
 type NavLink = {

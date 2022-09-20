@@ -7,7 +7,8 @@ export const APP = ( () => {
 
     const title = APP.title
     const version = APP.version
-    const shortTitle = `DMS ${ version }`
+    const shortVersion = APP.version.split( '.' ).slice( 0, -1 ).join( '.' )
+    const shortTitle = `DMS ${ shortVersion }`
     const fullTitle = `${ title } ${ version }`
     const fullTitleAndEnv = `${ fullTitle } : ${ startCase( ENV.name ) }`
     return {
@@ -22,6 +23,6 @@ export const APP = ( () => {
 logAppInfo()
 function logAppInfo () {
     console.groupCollapsed( APP.fullTitleAndEnv )
-    console.info( pretty( { ENV, appConfig: APP } ) )
+    console.info( pretty( APP ) )
     console.groupEnd()
 }
