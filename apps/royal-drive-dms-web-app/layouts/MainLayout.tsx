@@ -77,10 +77,10 @@ const PageArea: FC<{ children: any }> = ( { children } ) =>
     </div>
 
 const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
-    // const [ search, searchSet ] = useState( '' )
+    const [ search, searchSet ] = useState( '' )
     // const [ search, searchSet ] = useState( '1FTNE14W18DB27128' )
     // const [ search, searchSet ] = useState( '1C4NJDBB3HD133672' )
-    const [ search, searchSet ] = useState( '56206002' )
+    // const [ search, searchSet ] = useState( '56206002' )
 
     // TODO make search history/results popup under search bar
 
