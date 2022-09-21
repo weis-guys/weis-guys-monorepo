@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { CSSProperties, FC, useState } from 'react'
+import { CSSProperties, FC } from 'react'
 import { useStore } from 'zustand'
 import { LayoutComponent } from '.'
 import { MatIcon } from '../components/MatIcon'
@@ -11,6 +11,7 @@ import { GUIDES } from '../constants/GUIDES'
 import { NAV_LINKS } from '../constants/NAV_LINKS'
 import { SIZES } from '../constants/SIZES'
 import { combineClassNames } from '../lib/combineClassNames'
+import { useSearch } from '../lib/useSearch'
 import { sideNavStore } from '../stores/sideNavStore'
 import styles from './MainLayout.module.scss'
 
@@ -77,18 +78,7 @@ const PageArea: FC<{ children: any }> = ( { children } ) =>
     </div>
 
 const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
-    const [ search, searchSet ] = useState( '' )
-    // const [ search, searchSet ] = useState( '1FTNE14W18DB27128' )
-    // const [ search, searchSet ] = useState( '1C4NJDBB3HD133672' )
-    // const [ search, searchSet ] = useState( '56206002' )
-
-    /* TODO
-    - make search history/results popup under search bar
-    - make different sections in results
-      - active cars
-      - sold cars
-      - pages, so people can search for pages that might not appear in the nav bar
-    */
+    const [ search, searchSet ] = useSearch()
 
     return <input className='darken' type='text' placeholder='Search'
         value={search}
