@@ -1,17 +1,19 @@
-import { FC } from 'react'
+import { FC, MutableRefObject } from 'react'
+import { combineClassNames } from '../lib/combineClassNames'
+import { MatIcon } from './MatIcon'
 
 export const ToggleButton: FC<{
     active: boolean
     toggle: () => void
-    icon?: string
-}> = ( { active, toggle, icon } ) => {
-
-    const className = [
-        'btn primary icon',
+    matIcon?: string
+    className?: string
+    ref?: MutableRefObject<any>
+}> = ( { active, toggle, matIcon, ref, ...props } ) => {
+    return <button ref={ref} className={combineClassNames( [
+        'btn primary matIcon',
+        props.className,
         active ? 'active' : '',
-    ].filter( Boolean ).join( ' ' )
-
-    return <button className={className} onClick={toggle}>
-        <span className='material-symbols-outlined'>{icon}</span>
+    ] )} onClick={toggle}>
+        <MatIcon>{matIcon}</MatIcon>
     </button>
 }

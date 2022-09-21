@@ -1,4 +1,6 @@
 import '../global.scss'
+import '../breakpoints.scss'
+
 import { useRouter } from 'next/router'
 import { getDefaultPageTitle } from '../lib/getDefaultPageTitle'
 

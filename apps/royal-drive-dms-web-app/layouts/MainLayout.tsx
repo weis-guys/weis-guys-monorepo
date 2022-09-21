@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { CSSProperties, FC, useState } from 'react'
 import { useStore } from 'zustand'
 import { LayoutComponent } from '.'
+import { MatIcon } from '../components/MatIcon'
 import { NavLinkButton } from '../components/NavLink'
 import { ToggleButton } from '../components/ToggleButton'
 import { APP } from '../constants/APP'
@@ -9,7 +10,7 @@ import { COLORS } from '../constants/COLORS'
 import { GUIDES } from '../constants/GUIDES'
 import { NAV_LINKS } from '../constants/NAV_LINKS'
 import { SIZES } from '../constants/SIZES'
-import { useClickOutsideHandler } from '../lib/useClickOutsideHandler'
+import { combineClassNames } from '../lib/combineClassNames'
 import { sideNavStore } from '../stores/sideNavStore'
 import styles from './MainLayout.module.scss'
 
@@ -19,11 +20,11 @@ export const MainLayout: LayoutComponent = component => props => {
         APP.shortTitle,
     ].filter( Boolean ).join( ' | ' )
 
-    return <div className={styles.MainLayout} style={{
+    return <div style={{
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        minWidth: 300,
+        minWidth: 320,
         backgroundColor: COLORS.bgColorPrimary,
     }}>
 
@@ -49,19 +50,23 @@ const AppBar = () => {
         display: 'grid',
         placeItems: 'center',
     }}>
-        <div className={styles.appBarContainer} style={{
-            maxWidth: SIZES.pageArea.maxWidth,
-            backgroundColor: GUIDES.shadedAreas ? 'rgba(255, 255, 255, .2)' : '',
-        }}>
+        <div
+            className={styles.appBarContainer}
+            style={{
+                maxWidth: SIZES.pageArea.maxWidth,
+                backgroundColor: GUIDES.shadedAreas ? 'rgba(255, 255, 255, .2)' : '',
+            }}>
             <Nav style={{ justifySelf: 'left' }} />
+
             <Search style={{ justifySelf: 'center' }} />
-            <Profile style={{ justifySelf: 'right' }} />
+
+            <ProfileIconButton style={{ justifySelf: 'right' }} />
         </div>
     </div>
 }
 
-const PageArea: FC<{ children: any }> = ( { children } ) => {
-    return <div className='PageArea' style={{
+const PageArea: FC<{ children: any }> = ( { children } ) =>
+    <div className='PageArea' style={{
         backgroundColor: GUIDES.shadedAreas ? 'rgba(255, 255, 255, .1)' : '',
         margin: '0 auto',
         maxWidth: SIZES.pageArea.maxWidth,
@@ -70,13 +75,16 @@ const PageArea: FC<{ children: any }> = ( { children } ) => {
     }}>
         {children}
     </div>
-}
 
 const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
-    const [ search, searchSet ] = useState( '' )
-    // const [ search, searchSet ] = useState( 'hello how are you?' )
+    // const [ search, searchSet ] = useState( '' )
+    // const [ search, searchSet ] = useState( '1FTNE14W18DB27128' )
+    // const [ search, searchSet ] = useState( '1C4NJDBB3HD133672' )
+    const [ search, searchSet ] = useState( '56206002' )
 
-    return <input className='Search' type='text' placeholder='Search'
+    // TODO make search history/results popup under search bar
+
+    return <input className='darken' type='text' placeholder='Search'
         value={search}
         onChange={e => searchSet( e.target.value )}
         style={{
@@ -86,76 +94,102 @@ const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
             height: '100%',
             border: 'none',
             fontSize: 16,
-            backgroundColor: COLORS.colorPrimaryDarker,
         }}
     />
 }
 
-const Profile: FC<{ style: CSSProperties }> = ( { style } ) => {
-    return <div className='Profile' style={style}>
-        <NavLinkButton className='btn primary icon circle' href='/profile'>
-            <span className='material-symbols-outlined'>account_circle</span>
+const ProfileIconButton: FC<{ style: CSSProperties }> = ( { style } ) =>
+    <div className='md+' style={style}>
+        <NavLinkButton className='btn primary matIcon circle' href='/profile'>
+            <MatIcon>account_circle</MatIcon>
         </NavLinkButton>
     </div>
-}
 
 const Nav: FC<{ style: CSSProperties }> = ( { style } ) => {
     const close = useStore( sideNavStore, x => x.close )
+    const isOpen = useStore( sideNavStore, x => x.isOpen )
+    const toggle = useStore( sideNavStore, x => x.toggle )
 
-    return <nav style={style}>
-
-        <div className={styles.largeScreen}>
-            <NavLinkButtons onClick={close} />
+    return <nav>
+        <div style={{
+            ...style,
+            display: 'flex',
+            placeItems: 'center',
+            gap: 5,
+        }}>
+            <ToggleButton active={isOpen} toggle={toggle} className='md-' matIcon='menu' />
+            <NavLinkButtons context='appBar' onClick={close} />
         </div>
-
-        <div className={styles.smallScreen}>
+        <div>
             <SideNav>
-                <NavLinkButtons onClick={close} />
+                <NavLinkButtons context='sideNav' onClick={close} />
             </SideNav>
         </div>
-
     </nav>
 }
 
 const SideNav: FC<{ children: any }> = ( { children } ) => {
     const isOpen = useStore( sideNavStore, x => x.isOpen )
-    const toggle = useStore( sideNavStore, x => x.toggle )
     const close = useStore( sideNavStore, x => x.close )
-    const sideNavRef = useClickOutsideHandler( close )
 
-    return <>
-        <div style={{
-            display: isOpen ? 'block' : 'none',
-            height: '100vh',
-            width: '100vw',
-            position: 'fixed',
-            top: SIZES.appBar.height,
-            left: 0,
-            backgroundColor: 'rgba(255,255,255,0.5)',
-        }}></div>
-        <div ref={sideNavRef}>
-            <ToggleButton active={isOpen} toggle={toggle} icon='menu' />
+    return <div className='md-'>
 
-            {isOpen && <div style={{
-                top: SIZES.appBar.height,
-                backgroundColor: COLORS.bgColorSecondary,
+        <div
+            onClick={close}
+            className='OutsideOfSideNavArea' style={{
+                display: isOpen ? 'block' : 'none',
+                height: '100vh',
+                width: '100vw',
                 position: 'fixed',
+                cursor: 'pointer',
+                top: SIZES.appBar.height,
                 left: 0,
-                padding: 10,
+                backgroundColor: 'rgba(255,255,255,0.5)',
+            }}></div>
+
+        <div
+            className='SideNavArea'
+            style={{
+                display: isOpen ? 'block' : 'none',
+                position: 'fixed',
+                top: SIZES.appBar.height,
+                left: 0,
+                backgroundColor: COLORS.bgColorSecondary,
+                padding: '5px 0',
                 height: '100vh',
                 minWidth: 200,
             }}>
-                {children}
-            </div>}
+            {children}
         </div>
-    </>
+
+    </div>
 }
 
-const NavLinkButtons: FC<{ onClick?: () => void }> = ( { onClick } ) =>
-    <div className={styles.navLinkButtons}>
-        {NAV_LINKS.map( ( { href, title } ) =>
-            <NavLinkButton key={href} href={href} onClick={onClick}>
-                {title}
-            </NavLinkButton>
-        )}
+const NavLinkButtons: FC<{
+    context: 'appBar' | 'sideNav',
+    onClick?: () => void
+}> = ( { onClick, context } ) => {
+    return <div
+        data-context={context}
+        className={combineClassNames( [
+            context == 'appBar' && 'md+',
+            styles.navLinkButtons,
+        ] )}>
+        {NAV_LINKS
+            .map( ( { href, title, matIcon, appBarCtxClass, sideNavCtxClass } ) => {
+                return <NavLinkButton
+                    data-context={context}
+                    className={combineClassNames( [
+                        context == 'appBar' && appBarCtxClass,
+                        context == 'sideNav' && sideNavCtxClass,
+                    ] )}
+                    key={href}
+                    href={href}
+                    onClick={onClick}
+                >
+                    <MatIcon>{matIcon}</MatIcon>
+                    {title}
+                </NavLinkButton>
+            } )}
     </div>
+}

@@ -1,19 +1,43 @@
-import { RefObject, useEffect, useRef } from 'react'
+export { }
 
-export function useClickOutsideHandler ( cb: () => void ) {
-    const ref = useRef<Node>( null )
+// import { RefObject, useEffect, useRef } from 'react'
 
-    useEffect( () => {
-        function handleClickOutside ( e: MouseEvent ) {
-            if ( ref.current && !ref.current.contains( e.target as Node ) ) cb()
-        }
+// export function useClickOutsideHandler ( cb: () => void ) {
+//     const ref = useRef<Node>( null )
 
-        document.addEventListener( 'click', handleClickOutside )
+//     useEffect( () => {
+//         function handleClickOutside ( e: MouseEvent ) {
+//             if ( ref.current && !ref.current.contains( e.target as Node ) ) cb()
+//         }
 
-        return () => {
-            document.removeEventListener( 'click', handleClickOutside )
-        }
-    }, [ ref ] )
+//         document.addEventListener( 'click', handleClickOutside )
 
-    return ref as RefObject<any>
-}
+//         return () => {
+//             document.removeEventListener( 'click', handleClickOutside )
+//         }
+//     }, [ ref ] )
+
+//     return ref as RefObject<any>
+// }
+
+// export function useClickOutsideHandler (
+//     nodeRefs: Set<RefObject<Node | undefined>>,
+//     cb: () => void,
+// ) {
+//     useEffect( () => {
+//         function handleClickOutside ( e: MouseEvent ) {
+//             const clickedOutside = [ ...nodeRefs ].every( ref => {
+//                 console.log( ref.current )
+//                 return ref.current && !ref.current.contains( e.target as Node )
+//             } )
+//             // console.log( 'click', clickedOutside )
+//             if ( clickedOutside ) cb()
+//         }
+
+//         document.addEventListener( 'click', handleClickOutside )
+
+//         return () => {
+//             document.removeEventListener( 'click', handleClickOutside )
+//         }
+//     }, [ nodeRefs ] )
+// }

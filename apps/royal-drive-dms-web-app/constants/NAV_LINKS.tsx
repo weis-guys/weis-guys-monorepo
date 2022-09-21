@@ -1,27 +1,39 @@
 import { getDefaultPageTitle } from '../lib/getDefaultPageTitle'
-import { ENV } from './ENV'
+import { ScreenSizeClass } from '../lib/ScreenSizeClass'
 
-const navLinkConfigs: Record<string, Omit<NavLink, 'href'>> = {
-    '/car-list': {},
-    '/profit-calculator': {},
-    '/reporting': {},
-    // '/test': {
-    //     hide: ENV.isProd,
-    // },
-    // '/user-list': {
-    //     hide: ENV.isProd,
-    // },
-    // '/api': {
-    //     title: 'API',
-    //     hide: ENV.isProd,
-    // },
-}
-
-type NavLink = {
-    href: string
+type Config = {
     title?: string
     hide?: boolean
+    appBarCtxClass?: ScreenSizeClass | 'hide'
+    sideNavCtxClass?: ScreenSizeClass | 'hide'
+    matIcon?: string
 }
+
+const navLinkConfigs: Record<string, Config> = {
+    // '/car-details': {
+    //     matIcon: 'directions_car',
+    // },
+    '/car-list': {
+        matIcon: 'view_list',
+        appBarCtxClass: 'md+',
+        sideNavCtxClass: 'sm',
+    },
+    '/profit-calculator': {
+        matIcon: 'calculate',
+        appBarCtxClass: 'lg',
+    },
+    '/reporting': {
+        matIcon: 'assessment',
+        appBarCtxClass: 'lg',
+    },
+    '/profile': {
+        matIcon: 'account_circle',
+        appBarCtxClass: 'hide',
+        sideNavCtxClass: 'sm',
+    },
+}
+
+type NavLink = Config & { href: string }
 
 export const NAV_LINKS: NavLink[] = Object.entries( navLinkConfigs )
     .map( ( [ href, config ] ) => ( {

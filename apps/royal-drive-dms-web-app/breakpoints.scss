@@ -1,0 +1,54 @@
+.lg,
+.md\+,
+.md,
+.md-,
+.sm {
+    display: none !important;
+}
+
+/* lg: 769px+ */
+@media (min-width: 769px) {
+    .lg {
+        display: flex !important;
+        // place-items: center;
+    }
+}
+
+/* md+: 481px+ */
+@media (min-width: 481px) {
+    .md\+ {
+        display: flex !important;
+        // place-items: center;
+    }
+}
+
+/* md: 481px – 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .md {
+        display: flex !important;
+        // place-items: center;
+    }
+}
+
+/* md-: 768px- */
+@media (max-width: 768px) {
+    .md- {
+        display: flex !important;
+        // place-items: center;
+    }
+}
+
+/* sm: 480px- */
+@media (max-width: 480px) {
+    .sm {
+        display: flex !important;
+        // place-items: center;
+    }
+}
+
+/* Standard screen size break points */
+// 320px — 480px: Mobile devices
+// 481px — 768px: iPads, Tablets
+// 769px — 1024px: Small screens, laptops
+// 1025px — 1200px: Desktops, large screens
+// 1201px+ —  Extra large screens, TV
