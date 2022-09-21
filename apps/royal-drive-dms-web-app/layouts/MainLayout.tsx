@@ -82,7 +82,13 @@ const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
     // const [ search, searchSet ] = useState( '1C4NJDBB3HD133672' )
     // const [ search, searchSet ] = useState( '56206002' )
 
-    // TODO make search history/results popup under search bar
+    /* TODO
+    - make search history/results popup under search bar
+    - make different sections in results
+      - active cars
+      - sold cars
+      - pages, so people can search for pages that might not appear in the nav bar
+    */
 
     return <input className='darken' type='text' placeholder='Search'
         value={search}
