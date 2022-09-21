@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { CSSProperties, FC, useEffect, useRef, useState } from 'react'
+import { CSSProperties, FC, useState } from 'react'
 import { useStore } from 'zustand'
 import { LayoutComponent } from '.'
 import { MatIcon } from '../components/MatIcon'
@@ -11,7 +11,6 @@ import { GUIDES } from '../constants/GUIDES'
 import { NAV_LINKS } from '../constants/NAV_LINKS'
 import { SIZES } from '../constants/SIZES'
 import { combineClassNames } from '../lib/combineClassNames'
-import { useClickOutsideHandler } from '../lib/useClickOutsideHandler'
 import { sideNavStore } from '../stores/sideNavStore'
 import styles from './MainLayout.module.scss'
 
@@ -21,11 +20,11 @@ export const MainLayout: LayoutComponent = component => props => {
         APP.shortTitle,
     ].filter( Boolean ).join( ' | ' )
 
-    return <div className={styles.MainLayout} style={{
+    return <div style={{
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        minWidth: 300,
+        minWidth: 320,
         backgroundColor: COLORS.bgColorPrimary,
     }}>
 
@@ -51,23 +50,17 @@ const AppBar = () => {
         display: 'grid',
         placeItems: 'center',
     }}>
-        <div className={styles.appBarContainer} style={{
-            maxWidth: SIZES.pageArea.maxWidth,
-            backgroundColor: GUIDES.shadedAreas ? 'rgba(255, 255, 255, .2)' : '',
-        }}>
+        <div
+            className={styles.appBarContainer}
+            style={{
+                maxWidth: SIZES.pageArea.maxWidth,
+                backgroundColor: GUIDES.shadedAreas ? 'rgba(255, 255, 255, .2)' : '',
+            }}>
             <Nav style={{ justifySelf: 'left' }} />
 
             <Search style={{ justifySelf: 'center' }} />
 
-            <ProfileIconButton className={styles.lg} style={{ justifySelf: 'right' }} />
-
-            <SideNav>
-                <NavLinkButtons
-                    context='sideNav'
-                    className={styles.SideNav_NavLinkButtons}
-                    onClick={close} />
-            </SideNav>
-
+            <ProfileIconButton style={{ justifySelf: 'right' }} />
         </div>
     </div>
 }
@@ -84,12 +77,14 @@ const PageArea: FC<{ children: any }> = ( { children } ) =>
     </div>
 
 const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
-    const [ search, searchSet ] = useState( '' )
-    // const [ search, searchSet ] = useState( 'hello how are you?' )
+    // const [ search, searchSet ] = useState( '' )
+    // const [ search, searchSet ] = useState( '1FTNE14W18DB27128' )
+    // const [ search, searchSet ] = useState( '1C4NJDBB3HD133672' )
+    const [ search, searchSet ] = useState( '56206002' )
 
     // TODO make search history/results popup under search bar
 
-    return <input className='Search' type='text' placeholder='Search'
+    return <input className='darken' type='text' placeholder='Search'
         value={search}
         onChange={e => searchSet( e.target.value )}
         style={{
@@ -99,16 +94,12 @@ const Search: FC<{ style: CSSProperties }> = ( { style } ) => {
             height: '100%',
             border: 'none',
             fontSize: 16,
-            backgroundColor: COLORS.colorPrimaryDarker,
         }}
     />
 }
 
-const ProfileIconButton: FC<{ style: CSSProperties, className?: string }> =
-    ( { style, ...props } ) => <div className={combineClassNames( [
-        props.className,
-        styles.Profile,
-    ] )} style={style}>
+const ProfileIconButton: FC<{ style: CSSProperties }> = ( { style } ) =>
+    <div className='md+' style={style}>
         <NavLinkButton className='btn primary matIcon circle' href='/profile'>
             <MatIcon>account_circle</MatIcon>
         </NavLinkButton>
@@ -119,33 +110,21 @@ const Nav: FC<{ style: CSSProperties }> = ( { style } ) => {
     const isOpen = useStore( sideNavStore, x => x.isOpen )
     const toggle = useStore( sideNavStore, x => x.toggle )
 
-    return <nav style={{
-        ...style,
-        display: 'flex',
-        gap: 5,
-    }}>
-
-        <ToggleButton
-            className={combineClassNames( [
-                styles.md,
-                styles.sm,
-            ] )}
-            active={isOpen}
-            toggle={toggle}
-            matIcon='menu' />
-
-        <NavLinkButtons
-            context='appBar'
-            className={styles.AppBar_NavLinkButtons}
-            onClick={close} />
-
-        {/* <SideNav>
-            <NavLinkButtons
-                context='sideNav'
-                className={styles.SideNav_NavLinkButtons}
-                onClick={close} />
-        </SideNav> */}
-
+    return <nav>
+        <div style={{
+            ...style,
+            display: 'flex',
+            placeItems: 'center',
+            gap: 5,
+        }}>
+            <ToggleButton active={isOpen} toggle={toggle} className='md-' matIcon='menu' />
+            <NavLinkButtons context='appBar' onClick={close} />
+        </div>
+        <div>
+            <SideNav>
+                <NavLinkButtons context='sideNav' onClick={close} />
+            </SideNav>
+        </div>
     </nav>
 }
 
@@ -153,7 +132,7 @@ const SideNav: FC<{ children: any }> = ( { children } ) => {
     const isOpen = useStore( sideNavStore, x => x.isOpen )
     const close = useStore( sideNavStore, x => x.close )
 
-    return <div className={styles.SideNav}>
+    return <div className='md-'>
 
         <div
             onClick={close}
@@ -162,6 +141,7 @@ const SideNav: FC<{ children: any }> = ( { children } ) => {
                 height: '100vh',
                 width: '100vw',
                 position: 'fixed',
+                cursor: 'pointer',
                 top: SIZES.appBar.height,
                 left: 0,
                 backgroundColor: 'rgba(255,255,255,0.5)',
@@ -175,7 +155,7 @@ const SideNav: FC<{ children: any }> = ( { children } ) => {
                 top: SIZES.appBar.height,
                 left: 0,
                 backgroundColor: COLORS.bgColorSecondary,
-                padding: 10,
+                padding: '5px 0',
                 height: '100vh',
                 minWidth: 200,
             }}>
@@ -187,21 +167,21 @@ const SideNav: FC<{ children: any }> = ( { children } ) => {
 
 const NavLinkButtons: FC<{
     context: 'appBar' | 'sideNav',
-    className?: string,
     onClick?: () => void
-}> = ( { onClick, className, context } ) => {
-    return <div className={combineClassNames( [
-        className,
-        styles.md,
-        styles.navLinkButtons,
-    ] )}>
+}> = ( { onClick, context } ) => {
+    return <div
+        data-context={context}
+        className={combineClassNames( [
+            context == 'appBar' && 'md+',
+            styles.navLinkButtons,
+        ] )}>
         {NAV_LINKS
-            .map( ( { href, title, matIcon, showInAppBar } ) => {
+            .map( ( { href, title, matIcon, appBarCtxClass, sideNavCtxClass } ) => {
                 return <NavLinkButton
+                    data-context={context}
                     className={combineClassNames( [
-                        context == 'appBar' && showInAppBar == 'lg' && styles.lg,
-                        context == 'appBar' && showInAppBar == 'md' && styles.md,
-                        context == 'appBar' && !showInAppBar && 'hide',
+                        context == 'appBar' && appBarCtxClass,
+                        context == 'sideNav' && sideNavCtxClass,
                     ] )}
                     key={href}
                     href={href}
@@ -213,13 +193,3 @@ const NavLinkButtons: FC<{
             } )}
     </div>
 }
-
-
-
-
-/* 
-TODO
-fix problems with links showing/hiding on the wrong screen sizes
-*/
-
-

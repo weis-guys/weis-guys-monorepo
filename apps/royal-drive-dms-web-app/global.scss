@@ -1,9 +1,3 @@
-// 320px — 480px: Mobile devices
-// 481px — 768px: iPads, Tablets
-// 769px — 1024px: Small screens, laptops
-// 1025px — 1200px: Desktops, large screens
-// 1201px+ —  Extra large screens, TV
-
 * {
     color: white;
     margin: 0;
@@ -35,31 +29,14 @@ input::placeholder {
     }
 }
 
-a {
-    text-decoration: none;
-}
-
-a.btn {
-    display: flex;
-    padding: 8px 12px;
-
-    &.active {
-        cursor: default;
-        pointer-events: none;
-    }
-}
-
 .btn {
     border: none;
     border-radius: 5px;
+    padding: 8px;
     cursor: pointer;
 
     &.primary {
         background-color: transparent;
-    }
-
-    &.matIcon {
-        padding: 4px 8px;
     }
 
     &.circle {
@@ -78,10 +55,54 @@ a.btn {
     &:active {
         background-color: rgba(255, 255, 255, .3);
     }
+
+    &[data-context='sideNav'] {
+        border-radius: 0;
+    }
+}
+
+a {}
+
+a.btn {
+    text-decoration: none;
+    display: flex;
+
+    &.active {
+        cursor: default;
+        pointer-events: none;
+    }
 }
 
 .flex-spacer {
     flex-grow: 1;
+}
+
+.darken {
+    background-color: rgba(0, 0, 0, .2);
+
+    &:focus {
+        background:
+            linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)),
+            linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2));
+    }
+
+    &::selection {
+        background: rgba(0, 0, 0, .5);
+    }
+
+    &::-moz-selection {
+        background: rgba(0, 0, 0, .5);
+    }
+}
+
+.lighten {
+    background-color: rgba(255, 255, 255, .2);
+
+    &:focus {
+        background:
+            linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .2)),
+            linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .2));
+    }
 }
 
 .hide {

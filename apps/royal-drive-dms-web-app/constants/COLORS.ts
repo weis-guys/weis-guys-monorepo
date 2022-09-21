@@ -1,6 +1,9 @@
 export const COLORS = {
     textColorPrimary: '#FFFFFF',
 
+    darken: 'rgba(0, 0, 0, .2)',
+    lighten: 'rgba(255, 255, 255, .2)',
+
     colorPrimary: '#1565C0',
     colorPrimaryDarker: '#05458f',
     colorPrimaryLighter: '#3381da',

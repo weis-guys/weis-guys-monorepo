@@ -1,9 +1,11 @@
 import { getDefaultPageTitle } from '../lib/getDefaultPageTitle'
+import { ScreenSizeClass } from '../lib/ScreenSizeClass'
 
 type Config = {
     title?: string
     hide?: boolean
-    showInAppBar?: 'md' | 'lg'
+    appBarCtxClass?: ScreenSizeClass | 'hide'
+    sideNavCtxClass?: ScreenSizeClass | 'hide'
     matIcon?: string
 }
 
@@ -13,18 +15,21 @@ const navLinkConfigs: Record<string, Config> = {
     // },
     '/car-list': {
         matIcon: 'view_list',
-        showInAppBar: 'md',
+        appBarCtxClass: 'md+',
+        sideNavCtxClass: 'sm',
     },
     '/profit-calculator': {
         matIcon: 'calculate',
-        showInAppBar: 'lg',
+        appBarCtxClass: 'lg',
     },
     '/reporting': {
         matIcon: 'assessment',
-        showInAppBar: 'lg',
+        appBarCtxClass: 'lg',
     },
     '/profile': {
         matIcon: 'account_circle',
+        appBarCtxClass: 'hide',
+        sideNavCtxClass: 'sm',
     },
 }
 

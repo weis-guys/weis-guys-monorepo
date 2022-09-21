@@ -1,23 +1,11 @@
 .appBarContainer {
     display: grid;
-    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 600px) minmax(max-content, 1fr);
+    //                     NavLinks                 SearchBox                  ProfileButton
+    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 450px) minmax(max-content, 1fr);
     align-items: center;
     width: 100%;
-    padding: 0 10px;
+    padding: 0 5px;
     gap: 5px;
-}
-
-.lg {
-    display: flex !important;
-    place-items: center;
-}
-
-.md {
-    display: none !important;
-}
-
-.sm {
-    display: none !important;
 }
 
 .navLinkButtons {
@@ -25,59 +13,20 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
+
+    &[data-context='appBar'] {
+        flex-direction: row;
+    }
+
+    &[data-context='sideNav'] {
+        flex-direction: column;
+    }
 }
 
-.AppBar_NavLinkButtons {
-    flex-direction: row;
-}
-
-.SideNav_NavLinkButtons {
-    flex-direction: column;
-}
-
-.SideNav {
-    display: none;
-    float: left;
-}
-
-/* md */
-@media (max-width: 700px) {
+/* sm: 480px- */
+@media (max-width: 480px) {
     .appBarContainer {
+        //                     NavLinks    SearchBox
         grid-template-columns: max-content 1fr;
-        padding: 0 5px;
-    }
-
-    .SideNav {
-        display: block;
-    }
-
-    .lg {
-        display: none !important;
-    }
-
-    .md {
-        display: flex !important;
-        place-items: center;
-    }
-
-    // .sm {
-    //     display: none !important;
-    // }
-}
-
-/* sm */
-@media (max-width: 400px) {
-
-    .lg {
-        display: none !important;
-    }
-
-    .md {
-        display: none !important;
-    }
-
-    .sm {
-        display: flex !important;
-        place-items: center;
     }
 }
