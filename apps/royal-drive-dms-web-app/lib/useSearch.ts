@@ -1,12 +1,11 @@
+import { stringify } from '@weis-guys/ts-utils'
 import { useState } from 'react'
 
-const testSearch = ''
-// const testSearch = '1FTNE14W18DB27128'
-// const testSearch = '1C4NJDBB3HD133672'
-// const testSearch = '56206002'
+export function useSearch<Item> ( items: Item[] = [], initialSearch: string = '' ) {
+    const [ search, searchSet ] = useState( initialSearch )
+    // const [ search, searchSet ] = useState( initialSearch || testSearch )
 
-export function useSearch ( initialSearch?: string ) {
-    const [ search, searchSet ] = useState( initialSearch ?? testSearch )
+    const results = items.filter( item => stringify( item ).match( new RegExp( search, 'gi' ) ) )
 
     /* TODO
     - make search history/results popup under search bar
@@ -20,5 +19,5 @@ export function useSearch ( initialSearch?: string ) {
       - settings
     */
 
-    return [ search, searchSet ] as const
+    return { search, searchSet, results } as const
 }

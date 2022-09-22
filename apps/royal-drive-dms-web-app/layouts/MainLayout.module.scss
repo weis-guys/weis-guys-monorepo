@@ -1,11 +1,15 @@
 .appBarContainer {
     display: grid;
     //                     NavLinks                 SearchBox                  ProfileButton
-    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 450px) minmax(max-content, 1fr);
+    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 600px) minmax(max-content, 1fr);
     align-items: center;
     width: 100%;
     padding: 0 5px;
     gap: 5px;
+
+    >:last-child {
+        justify-self: right;
+    }
 }
 
 .navLinkButtons {

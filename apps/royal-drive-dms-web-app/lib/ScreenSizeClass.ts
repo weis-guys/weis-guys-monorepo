@@ -7,9 +7,14 @@ export const screenSizeClasses = [
     'sm', // small only
 ] as const
 
-//        lg    md    sm
-// .lg   show  hide  hide
-// .md+  show  show  hide
-// .md   hide  show  hide
-// .md-  hide  show  show
-// .sm   hide  hide  show
+type ScreenSizes = 'sm' | 'md' | 'lg'
+
+const ScreenSizeClassMatrix: {
+    [ key in ScreenSizeClass ]: { [ key in ScreenSizes ]: 'show' | 'hide' }
+} = {
+    'lg': { sm: 'hide', md: 'hide', lg: 'show' },
+    'md+': { sm: 'hide', md: 'show', lg: 'show' },
+    'md': { sm: 'hide', md: 'show', lg: 'hide' },
+    'md-': { sm: 'show', md: 'show', lg: 'hide' },
+    'sm': { sm: 'show', md: 'hide', lg: 'hide' },
+}

@@ -5,7 +5,7 @@ import {
     getSortedRowModel,
     HeaderContext
 } from '@tanstack/react-table'
-import { findMatchingProps, makeNumber, stringify, toDollarsAndCents } from '@weis-guys/ts-utils'
+import { findMatchingProps, makeNumber, nbsp, stringify, toDollarsAndCents } from '@weis-guys/ts-utils'
 import { Pretty } from '@weis-guys/ui'
 import { get, startCase } from 'lodash'
 import { useMemo, useState } from 'react'
@@ -37,7 +37,7 @@ const columnHelper = createColumnHelper<User>()
 
 function getHeader ( ctx: HeaderContext<User, any> ): string {
     const [ lastPropKey ] = ctx.column.id.split( /[_.]/ ).slice( -1 )
-    return startCase( lastPropKey ).replace( ' ', '\xa0' )
+    return startCase( lastPropKey ).replace( ' ', nbsp.js )
 }
 
 const userTableColumnDefs: ColumnDef<User>[] = [
