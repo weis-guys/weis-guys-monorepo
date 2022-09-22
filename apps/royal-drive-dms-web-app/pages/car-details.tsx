@@ -16,7 +16,7 @@ export default MainLayout( props => {
         <h1>{props.pageTitle}</h1>
         <p>Not ready yet</p>
         <br />
-        <p>VIN: {router.query.vin}</p>
+        {/* <p>VIN: {router.query.vin}</p> */}
         <Pretty>{car}</Pretty>
     </div>
 } )

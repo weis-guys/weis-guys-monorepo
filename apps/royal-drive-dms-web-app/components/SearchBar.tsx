@@ -65,43 +65,31 @@ export const SearchBar: FC<{}> = () => {
                 }}>
             </div>
 
-            <ul className={cssModule.searchResults} style={{
+            <div className={cssModule.searchResults} style={{
                 backgroundColor: COLORS.bgColorSecondary,
                 zIndex: 10,
             }}>
                 {results.map( ( { year, make, model, trim, color, vin, lotNumber, status } ) =>
-                    <li key={vin}>
+                    <Link href={`/car-details?vin=${ vin }`} >
+                        <a key={vin} onClick={blur}>
+                            <div>
+                                <span>{
+                                    joinTruthyValues( [
+                                        year, make, model, trim, color
+                                    ].map( x => x?.toString().toUpperCase() ) )
+                                }</span>
+                                <span>{startCase( status )}</span>
+                            </div>
 
-                        <Link href={`/car-details?vin=${ vin }`} >
-
-                            <a onClick={blur}>
-                                <p style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                }} >
-                                    <span>{
-                                        joinTruthyValues( [
-                                            year, make, model, trim, color
-                                        ].map( x => x?.toString().toUpperCase() ) )
-                                    }</span>
-                                    <span>{startCase( status )}</span>
-                                </p>
-
-                                <p style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                }} >
-                                    <small>{joinTruthyValues( [
-                                        vin, lotNumber
-                                    ], 3 )}</small>
-                                </p>
-                            </a>
-
-                        </Link>
-
-                    </li>
+                            <div>
+                                <small>{joinTruthyValues( [
+                                    vin, lotNumber
+                                ], 3 )}</small>
+                            </div>
+                        </a>
+                    </Link>
                 )}
-            </ul>
+            </div>
 
         </div>
 

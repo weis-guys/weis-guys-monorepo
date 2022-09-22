@@ -17,7 +17,9 @@
 
     background-color: rgba(162, 29, 29, 0.2);
 
-    li {
+    >a {
+        display: flex;
+        flex-direction: column;
         padding: 5px 10px;
         cursor: pointer;
 
@@ -29,7 +31,7 @@
             opacity: .5;
         }
 
-        p {
+        <<<<<<< HEAD p {
             gap: 5px;
         }
     }
@@ -38,4 +40,13 @@
 /* md-: 768px- */
 @media (max-width: 768px) {
     .searchResults {}
+
+    =======>* {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+    }
+}
+
+>>>>>>>main
 }
