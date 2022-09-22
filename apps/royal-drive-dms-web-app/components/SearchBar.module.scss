@@ -31,22 +31,10 @@
             opacity: .5;
         }
 
-        <<<<<<< HEAD p {
+        >* {
+            display: flex;
+            justify-content: space-between;
             gap: 5px;
         }
     }
-}
-
-/* md-: 768px- */
-@media (max-width: 768px) {
-    .searchResults {}
-
-    =======>* {
-        display: flex;
-        justify-content: space-between;
-        gap: 5px;
-    }
-}
-
->>>>>>>main
 }
