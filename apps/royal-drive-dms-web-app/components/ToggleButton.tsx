@@ -1,5 +1,5 @@
 import { FC, MutableRefObject } from 'react'
-import { combineClassNames } from '../lib/combineClassNames'
+import { joinTruthyValues } from '../lib/joinTruthyValues'
 import { MatIcon } from './MatIcon'
 
 export const ToggleButton: FC<{
@@ -9,7 +9,7 @@ export const ToggleButton: FC<{
     className?: string
     ref?: MutableRefObject<any>
 }> = ( { active, toggle, matIcon, ref, ...props } ) => {
-    return <button ref={ref} className={combineClassNames( [
+    return <button ref={ref} className={joinTruthyValues( [
         'btn primary matIcon',
         props.className,
         active ? 'active' : '',

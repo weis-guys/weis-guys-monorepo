@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { FC } from 'react'
-import { combineClassNames } from '../lib/combineClassNames'
+import { joinTruthyValues } from '../lib/joinTruthyValues'
 
 type NavLinkProps = {
     href: string
@@ -15,7 +15,7 @@ export const NavLink: FC<NavLinkProps> = ( { href, exact = true, children, ...pr
     const { pathname } = useRouter()
     const isActive = exact ? pathname === href : pathname.startsWith( href )
 
-    if ( isActive ) props.className = combineClassNames( [ props.className, 'active' ] )
+    if ( isActive ) props.className = joinTruthyValues( [ props.className, 'active' ] )
 
     return <Link href={href} >
         <a style={{
@@ -29,6 +29,6 @@ export const NavLink: FC<NavLinkProps> = ( { href, exact = true, children, ...pr
 }
 
 export const NavLinkButton: FC<NavLinkProps> = ( { children, ...props } ) => {
-    props.className = combineClassNames( [ props.className, 'btn' ] )
+    props.className = joinTruthyValues( [ props.className, 'btn' ] )
     return <NavLink {...props} >{children}</NavLink>
 }
