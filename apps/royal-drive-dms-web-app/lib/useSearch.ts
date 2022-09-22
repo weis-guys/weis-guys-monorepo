@@ -10,10 +10,14 @@ export function useSearch ( initialSearch?: string ) {
 
     /* TODO
     - make search history/results popup under search bar
-    - make different sections in results
-      - active cars
-      - sold cars
-      - pages, so people can search for pages that might not appear in the nav bar
+    - history
+      - previous searches
+      - previous clicked results
+    - make different sections in results for each result type
+    - result types
+      - cars (active and sold)
+      - pages, so users can search for pages that might not appear in the nav bar
+      - settings
     */
 
     return [ search, searchSet ] as const
