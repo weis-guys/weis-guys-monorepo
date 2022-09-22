@@ -60,10 +60,8 @@ export const SearchBar: FC<{}> = () => {
                     height: '100vh',
                     width: '100vw',
                     position: 'fixed',
-                    cursor: 'pointer',
                     top: SIZES.appBar.height,
                     left: 0,
-                    backgroundColor: 'rgba(255,255,255,0.3)',
                 }}>
             </div>
 
