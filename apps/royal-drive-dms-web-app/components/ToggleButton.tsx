@@ -10,7 +10,7 @@ export const ToggleButton: FC<{
     ref?: MutableRefObject<any>
 }> = ( { active, toggle, matIcon, ref, ...props } ) => {
     return <button ref={ref} className={joinTruthyValues( [
-        'btn primary matIcon',
+        'btn matIcon',
         props.className,
         active ? 'active' : '',
     ] )} onClick={toggle}>

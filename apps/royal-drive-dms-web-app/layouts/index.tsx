@@ -5,9 +5,11 @@ export type PageProps = {
     pageTitle?: string
 }
 
-export type PageComponent<Props extends AnyObj = AnyObj> = FC<PageProps & Props>
+// export type PageComponent<Props extends AnyObj = AnyObj> = FC<PageProps & Props>
+export type PageComponent<Props extends AnyObj = {}> = FC<PageProps & Props>
 
-export type LayoutComponent = <Props extends AnyObj = AnyObj> (
+// export type LayoutComponent = <Props extends AnyObj = AnyObj> (
+export type LayoutComponent = <Props extends AnyObj = {}> (
     component: PageComponent<Props>
 ) => PageComponent<Props>
 

@@ -21,13 +21,14 @@
     ],
     "dependencies": {
         "@js-temporal/polyfill": "^0.4.2",
+        "firebase": "^9.10.0",
         "lodash": "^4.17.21"
     },
     "devDependencies": {
-        "sass": "^1.54.9",
         "@types/lodash": "^4.14.184",
         "@types/node": "^17.0.12",
         "@types/react": "18.0.17",
+        "sass": "^1.54.9",
         "turbo": "1.4.6"
     },
     "engines": {

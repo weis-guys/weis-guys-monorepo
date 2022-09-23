@@ -1,6 +1,7 @@
+import { Car, CarDoc } from '@weis-guys/dms'
 import { NumberLike } from '@weis-guys/ts-utils'
 
-export type Car = {
+export type SampleCar = {
     vin?: string
     lotNumber?: string
     year?: NumberLike
@@ -12,7 +13,7 @@ export type Car = {
     status?: string
 }
 
-export const cars: Car[] = [
+export const sampleCars: SampleCar[] = [
     {
         vin: '1FTNE14W18DB27128',
         lotNumber: '9152022',
@@ -68,6 +69,55 @@ export const cars: Car[] = [
         color: 'Silver',
         status: 'onsite-repairs',
     },
+]
+
+export const carDocs: CarDoc[] = [
+    {
+        id: '1B3EL46R75N668626',
+        metadata: {
+            modified: new Date( '2022-07-07T15:26:59.137Z' )
+        },
+        model: 'STRATUS SXT',
+        vin: '1B3EL46R75N668626',
+        year: 2005,
+        make: 'DODGE',
+        acquisitions: [
+            {
+                odometer: 139698,
+                expenses: [
+                    {
+                        type: 'Transport',
+                        price: 80
+                    },
+                    {
+                        price: 20,
+                        type: 'Use Tax'
+                    }
+                ],
+                damages: [
+                    'Hail'
+                ],
+                sale: {
+                    gross: 200,
+                    from: 'Wholesale',
+                    date: new Date( '2018-07-13T05:00:00.000Z' )
+                },
+                title: {
+                    status: 'Clean'
+                },
+                notes: 'Vehicle not inspected prior to purchase',
+                listing: {
+                    date: new Date( '2018-06-28T05:00:00.000Z' )
+                },
+                acquired: {
+                    state: 'MN',
+                    price: 360,
+                    from: 'Copart',
+                    date: new Date( '2018-06-19T05:00:00.000Z' )
+                }
+            }
+        ]
+    }
 ]
 
 // const carTableColumnDefs: ColumnDef<Car>[] = [

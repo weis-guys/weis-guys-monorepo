@@ -1,3 +1,9 @@
+:root {
+    --colorPrimary: #1565C0;
+    --colorRed: #962929;
+    --colorRedBright: #B71C1C;
+}
+
 * {
     color: white;
     margin: 0;
@@ -34,9 +40,18 @@ input::placeholder {
     border-radius: 5px;
     padding: 8px;
     cursor: pointer;
+    background-color: transparent;
 
     &.primary {
-        background-color: transparent;
+        background-color: var(--colorPrimary);
+    }
+
+    &.red {
+        background-color: var(--colorRed);
+    }
+
+    &.bright-red {
+        background-color: var(--colorRedBright);
     }
 
     &.circle {

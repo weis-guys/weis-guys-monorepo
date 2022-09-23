@@ -15,6 +15,7 @@ import { joinTruthyValues } from '../lib/joinTruthyValues'
 import { sideNavStore } from '../stores/sideNavStore'
 import cssModule from './MainLayout.module.scss'
 
+// TODO add ability to have async component
 export const MainLayout: LayoutComponent = component => props => {
     const headerTitle = [
         props.pageTitle,
@@ -77,7 +78,7 @@ const PageArea: FC<{ children: any }> = ( { children } ) =>
 
 const ProfileIconButton: FC<{}> = () =>
     <div className='md+'>
-        <NavLinkButton className='btn primary matIcon circle' href='/profile'>
+        <NavLinkButton className='btn matIcon circle' href='/profile'>
             <MatIcon>account_circle</MatIcon>
         </NavLinkButton>
     </div>
@@ -152,21 +153,20 @@ const NavLinkButtons: FC<{
             context == 'appBar' && 'md+',
             cssModule.navLinkButtons,
         ] )}>
-        {NAV_LINKS
-            .map( ( { href, title, matIcon, appBarCtxClass, sideNavCtxClass } ) => {
-                return <NavLinkButton
-                    data-context={context}
-                    className={joinTruthyValues( [
-                        context == 'appBar' && appBarCtxClass,
-                        context == 'sideNav' && sideNavCtxClass,
-                    ] )}
-                    key={href}
-                    href={href}
-                    onClick={onClick}
-                >
-                    <MatIcon>{matIcon}</MatIcon>
-                    {title}
-                </NavLinkButton>
-            } )}
+        {NAV_LINKS.map( ( { href, title, matIcon, appBarCtxClass, sideNavCtxClass } ) => {
+            return <NavLinkButton
+                data-context={context}
+                className={joinTruthyValues( [
+                    context == 'appBar' && appBarCtxClass,
+                    context == 'sideNav' && sideNavCtxClass,
+                ] )}
+                key={href}
+                href={href}
+                onClick={onClick}
+            >
+                <MatIcon>{matIcon}</MatIcon>
+                {title}
+            </NavLinkButton>
+        } )}
     </div>
 }

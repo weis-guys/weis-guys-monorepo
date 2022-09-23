@@ -2,6 +2,7 @@ import { getAppConfig, pretty } from '@weis-guys/ts-utils'
 import { startCase } from 'lodash'
 import { ENV } from './ENV'
 
+export type APP = typeof APP
 export const APP = ( () => {
     const APP = getAppConfig( 'nextjs' )
 
@@ -20,8 +21,8 @@ export const APP = ( () => {
     } as const
 } )()
 
-logAppInfo()
-function logAppInfo () {
+logInfo()
+function logInfo () {
     console.groupCollapsed( APP.fullTitleAndEnv )
     console.info( pretty( APP ) )
     console.groupEnd()
