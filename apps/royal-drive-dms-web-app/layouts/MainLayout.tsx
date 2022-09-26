@@ -1,3 +1,4 @@
+import { joinTruthyValues } from '@weis-guys/ts-utils'
 import Head from 'next/head'
 import { FC } from 'react'
 import { useStore } from 'zustand'
@@ -11,7 +12,6 @@ import { COLORS } from '../constants/COLORS'
 import { GUIDES } from '../constants/GUIDES'
 import { NAV_LINKS } from '../constants/NAV_LINKS'
 import { SIZES } from '../constants/SIZES'
-import { joinTruthyValues } from '../lib/joinTruthyValues'
 import { sideNavStore } from '../stores/sideNavStore'
 import cssModule from './MainLayout.module.scss'
 

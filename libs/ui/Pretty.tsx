@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react'
-import { pretty } from '@weis-guys/ts-utils'
+import YAML from 'yaml'
 
 export const Pretty: FC<{
     data?: {},
     children?: {},
-    spaces?: number | string,
+    indent?: number,
 }> = props => {
     const [ data, setData ] = useState<any>()
 
@@ -13,5 +13,9 @@ export const Pretty: FC<{
         setData( props.children ?? props.data )
     }, [ props.children ?? props.data ] )
 
-    return <pre>{pretty( data, { spaces: props.spaces } )}</pre>
+    const prettyString = YAML.stringify( data, {
+        indent: props.indent ?? 4,
+    } )
+
+    return <pre>{prettyString}</pre>
 }

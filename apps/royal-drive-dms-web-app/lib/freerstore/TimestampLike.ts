@@ -14,14 +14,14 @@ export module TimestampLike {
             return TimestampLike.toTimestamp( value ).toDate().toISOString()
 
         if ( isObject( value ) )
-            return TimestampLikes.toDates( value )
+            return TimestampLikes.toISOs( value )
 
         return value
     }
 }
 
 module TimestampLikes {
-    export const toDates = <T extends Record<string, any> | any[]> ( obj: T ) => {
+    export const toISOs = <T extends Record<string, any> | any[]> ( obj: T ) => {
         if ( Array.isArray( obj ) ) return obj.map( TimestampLike.toISO )
 
         return Object.fromEntries(

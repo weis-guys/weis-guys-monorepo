@@ -1,5 +1,5 @@
+import { joinTruthyValues } from '@weis-guys/ts-utils'
 import { FC, MutableRefObject } from 'react'
-import { joinTruthyValues } from '../lib/joinTruthyValues'
 import { MatIcon } from './MatIcon'
 
 export const ToggleButton: FC<{

@@ -4,14 +4,13 @@ import { startCase } from 'lodash'
 import { FC, useState } from 'react'
 import { COLORS } from '../constants/COLORS'
 import { SIZES } from '../constants/SIZES'
-import { joinTruthyValues } from '../lib/joinTruthyValues'
 import { useNewFeatureHighlight } from '../lib/useNewFeatureHighlight'
 import { useSearch } from '../lib/useSearch'
-import { cars } from '../sampleData/cars'
+import { joinTruthyValues } from '@weis-guys/ts-utils'
 
 export const SearchBar: FC<{}> = () => {
     const { search, searchSet, results } = useSearch(
-        cars,
+        // cars,
         // '1FTNE14W18DB27128',
         // '1C4NJDBB3HD133672',
         // '56206002',
@@ -69,26 +68,30 @@ export const SearchBar: FC<{}> = () => {
                 backgroundColor: COLORS.bgColorSecondary,
                 zIndex: 10,
             }}>
-                {results.map( ( { year, make, model, trim, color, vin, lotNumber, status } ) =>
-                    <Link href={`/car-details?vin=${ vin }`} >
-                        <a key={vin} onClick={blur}>
-                            <div>
-                                <span>{
-                                    joinTruthyValues( [
-                                        year, make, model, trim, color
-                                    ].map( x => x?.toString().toUpperCase() ) )
-                                }</span>
-                                <span>{startCase( status )}</span>
-                            </div>
 
-                            <div>
-                                <small>{joinTruthyValues( [
-                                    vin, lotNumber
-                                ], 3 )}</small>
-                            </div>
-                        </a>
-                    </Link>
-                )}
+                {!results.length && 'No results'}
+                {/* {results.length &&
+                    results.map( ( { year, make, model, trim, color, vin, lotNumber, status } ) =>
+                        <Link href={`/car-details?vin=${ vin }`} >
+                            <a key={vin} onClick={blur}>
+                                <div>
+                                    <span>{
+                                        joinTruthyValues( [
+                                            year, make, model, trim, color
+                                        ].map( x => x?.toString().toUpperCase() ) )
+                                    }</span>
+                                    <span>{startCase( status )}</span>
+                                </div>
+
+                                <div>
+                                    <small>{joinTruthyValues( [
+                                        vin, lotNumber
+                                    ], 3 )}</small>
+                                </div>
+                            </a>
+                        </Link>
+                    )
+                } */}
             </div>
 
         </div>

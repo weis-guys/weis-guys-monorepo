@@ -3,6 +3,7 @@ import { createStore } from 'zustand'
 export const sideNavStore = createStore<{
     isOpen: boolean
     toggle: () => void
+    open: () => void
     close: () => void
 }>(
     set => ( {

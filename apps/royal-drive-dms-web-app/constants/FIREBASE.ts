@@ -1,6 +1,6 @@
 import { initializeApp, FirebaseOptions, getApps, FirebaseApp } from 'firebase/app'
-import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 import { ENV } from './ENV'
 import { pretty } from '@weis-guys/ts-utils'
 
@@ -38,12 +38,12 @@ const initApp = ( name: string = '[DEFAULT]' ): FirebaseApp => {
 }
 
 export type FIREBASE = typeof FIREBASE
-export const FIREBASE = ( async () => {
+export const FIREBASE = ( () => {
 
     // const app = initApp( ENV.name )
     // const app = initApp( 'prod' )
     const app = initApp()
-    const auth = getAuth( app )
+    // const auth = getAuth( app )
     const db = getFirestore( app )
 
     // try {
@@ -52,7 +52,9 @@ export const FIREBASE = ( async () => {
     //     console.error( error )
     // }
 
-    return { app, db, auth } as const
+    return { app, db } as const
+    // return { app, db, auth } as const
+    // return { app, auth } as const
 } )()
 
 // logInfo()

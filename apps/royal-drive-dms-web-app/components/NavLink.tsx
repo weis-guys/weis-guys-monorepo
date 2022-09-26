@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { FC } from 'react'
-import { joinTruthyValues } from '../lib/joinTruthyValues'
+import { joinTruthyValues } from '@weis-guys/ts-utils'
 
 type NavLinkProps = {
     href: string
