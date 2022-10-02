@@ -13,6 +13,7 @@
         "@formkit/auto-animate": "^1.0.0-beta.3",
         "@tanstack/react-query": "^4.3.4",
         "@tanstack/react-table": "^8.5.13",
+        "@weis-guys/freerstore": "*",
         "@weis-guys/dms": "*",
         "@weis-guys/ts-utils": "*",
         "@weis-guys/ui": "*",
