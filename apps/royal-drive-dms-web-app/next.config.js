@@ -3,6 +3,7 @@ const transpiledDeps = require( 'next-transpile-modules' )( [
     '@weis-guys/ui',
     '@weis-guys/dms',
     '@weis-guys/ts-utils',
+    '@weis-guys/freerstore',
 ] )
 
 module.exports = {

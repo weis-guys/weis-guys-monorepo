@@ -4,6 +4,8 @@ export type Miles = number
 
 export type NumberLike = number | string | bigint
 export type Nullish = undefined | null | void
+export type Nullable<T> = T | Nullish
+export type NonNullable<T> = T extends Nullable<infer U> ? U : never
 export type Primitive = string | number | boolean | bigint | symbol | Nullish
 
 export type UnknownObj = Record<string, unknown>
@@ -11,6 +13,7 @@ export type UnknownObj = Record<string, unknown>
 export type PureFn<In = any, Out = any> = ( ...args: In[] ) => Out
 export type AnyClass = { new( ...args: any[] ): any }
 export type AnyObj = Record<string, any>
+export type AnyNullableObj = Nullable<AnyObj>
 export type AnyMap = Map<string, any>
 export type AnyArray = any[]
 export type AnyFunction = ( ...args: any[] ) => any
