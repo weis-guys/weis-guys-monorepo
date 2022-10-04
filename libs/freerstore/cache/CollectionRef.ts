@@ -10,11 +10,13 @@ export type CollectionRef<Data extends AnyObj> = {
     dbRef: DBRef
     lfRef: LocalForage
     doc: DocRefMaker<Data>
-    find: ( selector?: Selector<Data> ) => Promise<Data | undefined>
+    query: ( queryFn: ( entry: { key: string, data: Data | undefined } ) => boolean ) => Promise<( Data | undefined )[]>
+    findOne: ( selector?: Selector<Data> ) => Promise<Data | undefined>
     findMany: ( selector?: Selector<Data> ) => Promise<( Data | undefined )[]>
     // add: ( data: Data ) => Promise<Data | undefined>
 }
 
+// type Entry<Data extends AnyObj> = readonly [ string, Data | undefined ]
 export type CollectionRefMaker = ReturnType<typeof makeCollectionRef>
 
 export const makeCollectionRef = ( dbRef: DBRef ) =>
@@ -42,15 +44,15 @@ export const makeCollectionRef = ( dbRef: DBRef ) =>
             )
         }
 
-        const entryFilter = ( selector?: Selector<Data> ) => ( [ , doc ]: Entry ) =>
-            Object.entries( selector ?? {} ).every( ( [ key, val ] ) => doc?.[ key ] === val )
+        const entryFilter = ( selector?: Selector<Data> ) => ( [ , data ]: Entry ) =>
+            Object.entries( selector ?? {} ).every( ( [ key, val ] ) => data?.[ key ] === val )
 
         const collectionRef: CollectionRef<Data> = {
             name: collectionName,
             dbRef,
             lfRef,
             doc: x => makeDocRef( dbRef )( collectionRef )( x ),
-            find: async selector => {
+            findOne: async selector => {
                 const entries = await getEntries()
                 const entry = entries.find( entryFilter( selector ) )
                 return entry?.[ 1 ]
@@ -59,7 +61,13 @@ export const makeCollectionRef = ( dbRef: DBRef ) =>
                 const entries = await getEntries()
                 const filteredEntries = entries.filter( entryFilter( selector ) )
                 if ( !filteredEntries?.length ) return []
-                return filteredEntries.map( ( [ , doc ] ) => doc )
+                return filteredEntries.map( ( [ , data ] ) => data )
+            },
+            query: async queryFn => {
+                const entries = await getEntries()
+                const filteredEntries = entries.filter( ( [ key, data ] ) => queryFn( { key, data } ) )
+                if ( !filteredEntries?.length ) return []
+                return filteredEntries.map( ( [ , data ] ) => data )
             },
             // add: async data => {
             //     console.log( 'add', data )

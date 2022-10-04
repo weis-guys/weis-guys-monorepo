@@ -19,7 +19,8 @@ module.exports = {
         return [
             {
                 source: '/',
-                destination: '/car-list',
+                destination: '/test',
+                // destination: '/car-list',
                 permanent: true,
             },
         ]

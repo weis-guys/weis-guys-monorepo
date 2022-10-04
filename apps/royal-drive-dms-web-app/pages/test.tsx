@@ -20,12 +20,20 @@ const populateLocalDB = async () => {
 const doTheThing = async () => {
     await populateLocalDB()
 
-    // console.log(
-    //     await carsCollection.findMany()
-    // )
+    console.log(
+        await carsCollection.findMany()
+    )
 
     console.log(
-        await carsCollection.find( {
+        await carsCollection.query( ( { data } ) => data?.make === 'HYUNDAI' )
+    )
+
+    console.log(
+        await carsCollection.query( ( { key } ) => !!key?.match( /5NPEB4A/ig ) )
+    )
+
+    console.log(
+        await carsCollection.findOne( {
             year: 2005,
         } )
     )

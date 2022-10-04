@@ -6,10 +6,10 @@ export const carDocs: CarDoc[] = [
         metadata: {
             modified: new Date( '2022-07-07T15:26:59.137Z' )
         },
-        model: 'STRATUS SXT',
         vin: '1B3EL46R75N668626',
         year: 2005,
         make: 'DODGE',
+        model: 'STRATUS SXT',
         acquisitions: [
             {
                 odometer: 139698,

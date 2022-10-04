@@ -5,3 +5,6 @@ export * from './DBRef'
 
 // https://github.com/localForage/localForage
 // https://github.com/dannyconnell/localbase
+
+// https://github.com/cosmicanant/recursive-diff
+// https://davidwells.io/snippets/get-difference-between-two-objects-javascript
