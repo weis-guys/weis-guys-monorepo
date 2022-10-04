@@ -1,49 +1,34 @@
-import { AnyNullableObj, AnyObj } from '@weis-guys/ts-utils'
+import { AnyObj } from '@weis-guys/ts-utils'
 import { CollectionRef } from './CollectionRef'
 import { DBRef } from './DBRef'
 
-export type DocSelector<Data extends AnyObj> = string | Partial<Data>
-
-export type DocRef<Data extends AnyNullableObj> = {
-    selector: DocSelector<NonNullable<Data>>
-    get: () => Promise<Data>
-    set: ( data: Data ) => Promise<Data>
+export type DocRef<Data extends AnyObj> = {
+    id: string
+    get: () => Promise<Data | undefined>
+    set: ( data: Data ) => Promise<Data | undefined>
 }
 
-type CollectionDocRefMaker = <Data extends AnyNullableObj> (
+type CollectionDocRefMaker = <Data extends AnyObj> (
     collection: CollectionRef<Data>
 ) => DocRefMaker<Data>
 
-export type DocRefMaker<Data extends AnyNullableObj> = (
-    selector: DocSelector<NonNullable<Data>>
+export type DocRefMaker<Data extends AnyObj> = (
+    id: string
 ) => DocRef<Data>
 
 export const makeDocRef = ( db: DBRef ): CollectionDocRefMaker =>
-    <Data extends AnyNullableObj> ( collection: CollectionRef<Data> ): DocRefMaker<Data> =>
-        selector => {
-            if ( !selector )
-                throw new Error( 'selector is required' )
+    <Data extends AnyObj> ( collection: CollectionRef<Data> ): DocRefMaker<Data> =>
+        id => {
+            if ( !id )
+                throw new Error( 'id is required' )
 
-            const idSelector = typeof selector == 'string' ? selector : undefined
-            const objSelector = typeof selector == 'object' ? selector : undefined
-
-            if ( !idSelector && !objSelector )
-                throw new Error( 'selector must be a string or object' )
+            if ( typeof id != 'string' )
+                throw new Error( 'id must be a string' )
 
             const docRef: DocRef<Data> = {
-                selector,
-                get: async () => {
-                    if ( idSelector )
-                        return await collection.lfRef.getItem( idSelector ) as Data
-
-                    return {} as Data
-                },
-                set: async data => {
-                    if ( idSelector )
-                        return await collection.lfRef.setItem( idSelector, data ) as Data
-
-                    return {} as Data
-                },
+                id,
+                get: async () => await collection.lfRef.getItem<Data>( id ) ?? undefined,
+                set: async data => await collection.lfRef.setItem( id, data ) as Data,
             }
 
             return docRef

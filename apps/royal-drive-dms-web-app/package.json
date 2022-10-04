@@ -17,6 +17,7 @@
         "@weis-guys/dms": "*",
         "@weis-guys/ts-utils": "*",
         "@weis-guys/ui": "*",
+        "nanoid": "^4.0.0",
         "axios": "^0.27.2",
         "lodash": "^4.17.21",
         "next": "12.3.0",

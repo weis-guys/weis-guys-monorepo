@@ -1,46 +1,45 @@
+import { CarDoc } from '@weis-guys/dms'
 import { makeDBRef } from '@weis-guys/freerstore'
-import { pretty } from '@weis-guys/ts-utils'
+import { Pretty } from '@weis-guys/ui'
 import { useEffect } from 'react'
 import { Lorem } from '../components/Lorem'
 import { MainLayout } from '../layouts/MainLayout'
+import { carDocs } from '../sampleData/carDocs'
+
+const db = makeDBRef( 'dms2' )
+const carsCollection = db.collection<CarDoc>( 'cars' )
+
+const populateLocalDB = async () => {
+    const cars = await carsCollection.findMany()
+    if ( cars.length ) return
+
+    console.info( 'populated LocalDB with sampleData/carDocs' )
+    carDocs.forEach( doc => carsCollection.doc( doc.id ).set( doc ) )
+}
 
 const doTheThing = async () => {
-    const db = makeDBRef( 'test-db' )
-    type DocData = {
-        id: string
-        username: string
-    }
-    const collection = db.collection<DocData>( 'test-collection' )
+    await populateLocalDB()
 
-    // console.log( pretty( { db, collection } ) )
+    // console.log(
+    //     await carsCollection.findMany()
+    // )
 
-    const docRefs = [
-        collection.doc( 'test-doc1' ),
-        collection.doc( { id: 'test-doc2' } )
-    ]
-
-    await docRefs[ 0 ].set( {
-        id: 'test-doc1',
-        username: 'username1'
-    } )
-
-    docRefs.forEach( doc => {
-        doc.get().then( data => {
-            data?.id
-            data?.username
-
-            console.log( pretty( { doc, data } ) )
+    console.log(
+        await carsCollection.find( {
+            year: 2005,
         } )
-    } )
+    )
+
+    return carsCollection.findMany()
 }
 
 export default MainLayout( props => {
-
-    useEffect( () => {
-        doTheThing()
-    }, [] )
+    // useEffect( () => {
+    //     doTheThing().then
+    // }, [] )
 
     return <>
+        <Pretty type='yaml'>{doTheThing()}</Pretty>
         {/* <Lorem /> */}
     </>
 } )

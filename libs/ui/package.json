@@ -1,8 +1,10 @@
 {
     "name": "@weis-guys/ui",
     "version": "0.0.0",
+    "dependencies": {
+        "@weis-guys/ts-utils": "*"
+    },
     "devDependencies": {
-        "@weis-guys/ts-utils": "*",
         "@weis-guys/tsconfig": "*",
         "@types/react": "^17.0.37",
         "@types/react-dom": "^17.0.11",
