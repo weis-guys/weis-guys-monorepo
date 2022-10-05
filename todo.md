@@ -1,4 +1,5 @@
 ## todo
+- https://daisyui.com/components/
 
 ---
 ### done

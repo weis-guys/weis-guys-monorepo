@@ -1,35 +1,23 @@
-import { AnyObj } from '@weis-guys/ts-utils'
+import { AnyObj, is } from '@weis-guys/ts-utils'
 import { CollectionRef } from './CollectionRef'
-import { DBRef } from './DBRef'
 
 export type DocRef<Data extends AnyObj> = {
-    id: string
-    get: () => Promise<Data | undefined>
-    set: ( data: Data ) => Promise<Data | undefined>
+    key: string
+    getData: () => Promise<Data | undefined>
+    setData: ( data: Data ) => Promise<Data | undefined>
 }
 
-type CollectionDocRefMaker = <Data extends AnyObj> (
+export type DocRefMaker<Data extends AnyObj> = ( key: string ) => DocRef<Data>
+
+export const makeDocRef = <Data extends AnyObj> (
     collection: CollectionRef<Data>
-) => DocRefMaker<Data>
+): DocRefMaker<Data> => key => {
+    if ( !key ) throw new Error( 'key is required' )
+    if ( !is.string( key ) ) throw new Error( 'key must be a string' )
 
-export type DocRefMaker<Data extends AnyObj> = (
-    id: string
-) => DocRef<Data>
-
-export const makeDocRef = ( db: DBRef ): CollectionDocRefMaker =>
-    <Data extends AnyObj> ( collection: CollectionRef<Data> ): DocRefMaker<Data> =>
-        id => {
-            if ( !id )
-                throw new Error( 'id is required' )
-
-            if ( typeof id != 'string' )
-                throw new Error( 'id must be a string' )
-
-            const docRef: DocRef<Data> = {
-                id,
-                get: async () => await collection.lfRef.getItem<Data>( id ) ?? undefined,
-                set: async data => await collection.lfRef.setItem( id, data ) as Data,
-            }
-
-            return docRef
-        }
+    return {
+        key,
+        getData: async () => await collection.getItem( key ) ?? undefined,
+        setData: async data => await collection.setItem( key, data ) as Data,
+    }
+}

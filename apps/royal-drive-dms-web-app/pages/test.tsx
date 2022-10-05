@@ -1,27 +1,28 @@
 import { CarDoc } from '@weis-guys/dms'
-import { makeDBRef } from '@weis-guys/freerstore'
+import { makeCacheRef } from '@weis-guys/freerstore'
 import { Pretty } from '@weis-guys/ui'
 import { useEffect } from 'react'
 import { Lorem } from '../components/Lorem'
 import { MainLayout } from '../layouts/MainLayout'
 import { carDocs } from '../sampleData/carDocs'
 
-const db = makeDBRef( 'dms2' )
-const carsCollection = db.collection<CarDoc>( 'cars' )
+const cache = makeCacheRef( 'dms2' )
+const carsCollection = cache.collection<CarDoc>( 'cars' )
 
-const populateLocalDB = async () => {
+const fillCache = async () => {
     const cars = await carsCollection.findMany()
     if ( cars.length ) return
 
-    console.info( 'populated LocalDB with sampleData/carDocs' )
-    carDocs.forEach( doc => carsCollection.doc( doc.id ).set( doc ) )
+    console.info( 'filled Cache with sampleData/carDocs' )
+    carDocs.forEach( doc => carsCollection.doc( doc.id ).setData( doc ) )
 }
 
 const doTheThing = async () => {
-    await populateLocalDB()
+    await fillCache()
 
+    const cachedCarDocs = await carsCollection.findMany()
     console.log(
-        await carsCollection.findMany()
+        cachedCarDocs[ 0 ]?.id,
     )
 
     console.log(
