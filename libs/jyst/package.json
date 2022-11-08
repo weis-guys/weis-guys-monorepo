@@ -1,0 +1,15 @@
+{
+    "name": "@weis-guys/jyst",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "nodemon ./index.ts",
+        "dev.cmd": "start cmd /k yarn dev"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.12",
+        "@weis-guys/ts-utils": "*",
+        "@weis-guys/tsconfig": "*",
+        "typescript": "^4.5.2"
+    },
+    "nodemonConfig": {}
+}

@@ -1,6 +1,8 @@
 import '../global.scss'
 import '../breakpoints.scss'
 
+{/* <meta name="robots" content="noindex"> */ }
+
 import { useRouter } from 'next/router'
 import { getDefaultPageTitle } from '../lib/getDefaultPageTitle'
 
