@@ -12,6 +12,7 @@
         "@weis-guys/ui": "*",
         "@weis-guys/dms": "*",
         "@weis-guys/ts-utils": "*",
+        "@weis-guys/jyst": "*",
         "axios": "^0.27.2",
         "mongodb": "^4.9.1",
         "next": "12.3.0",
