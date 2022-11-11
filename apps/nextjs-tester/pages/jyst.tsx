@@ -1,38 +1,58 @@
 import { makeType } from '@weis-guys/jyst'
+import { pretty, pretty1Line } from '@weis-guys/ts-utils'
 
 test()
 function test () {
     console.clear()
 
-    const type = makeType<( 42 | 'foo' )>( value =>
-        value == 42 || value == 'foo' || 'not 42 or foo'
-    )
-
-    const stringType = makeType<string>( value =>
-        typeof value === 'string' || `${ value } not a string`
-    )
-
-    const positiveType = makeType<number>( value => {
-        if ( typeof value === 'number' ) {
-            return value > 0 || `${ value } not a positive number`
-        } else {
-            return `${ value } not a number`
-        }
-    } )
-
-    console.group( 'stringType' )
-    console.log( stringType.validate( 'hello' ) ) // { data: 'hello' }
-    console.log( stringType.validate( 4 ) ) // { error: '4 not a string' }
-    console.log( stringType.validate( true ) ) // { error: 'true not a string' }
+    console.group( 'stringOrNumberType' )
+    const stringOrNumberType = makeType()
+        .config( { requiredPasses: 'some' } )
+        .addValidator(
+            ( value: string | number ) => typeof value == 'string' || typeof value == 'number',
+            value => `${ value } is not a string or number`,
+        )
+    console.log( pretty( stringOrNumberType ) )
+    console.log( pretty1Line( stringOrNumberType.validate( 'hello' ) ) )
+    console.log( pretty1Line( stringOrNumberType.validate( 4 ) ) )
+    console.log( pretty1Line( stringOrNumberType.validate( true ) ) )
     console.groupEnd()
 
-    console.group( 'positiveType' )
-    console.log( positiveType.validate( 42 ) ) // { data: 42 } 
-    console.log( positiveType.validate( 0 ) ) // { errors: [ '0 not a positive number' ] }
-    console.log( positiveType.validate( -42 ) ) // { errors: [ '-42 not a positive number' ] }
-    console.log( positiveType.validate( 'hello' ) ) // { errors: [ 'hello not a number' ] }
-    console.log( positiveType.validate( true ) ) // { errors: [ 'true not a number' ] }
+    console.group( 'fooOr42Type' )
+    const fooOr42Type = stringOrNumberType.addValidator(
+        ( value: 'foo' | 42 ) => value == 'foo' || value == 42,
+        value => `${ value } is not foo or 42`,
+    )
+    console.log( pretty1Line( fooOr42Type.validate( 'foo' ) ) )
+    console.log( pretty1Line( fooOr42Type.validate( 42 ) ) )
+    console.log( pretty1Line( fooOr42Type.validate( true ) ) )
+    console.log( pretty1Line( fooOr42Type.validate( 'bar' ) ) )
+    console.log( pretty1Line( fooOr42Type.validate( 42465 ) ) )
     console.groupEnd()
+
+    console.group( 'fooType' )
+    const fooType = fooOr42Type.addValidator<'foo'>(
+        value => value == 'foo',
+        value => `${ value } is not foo`,
+    )
+    console.log( pretty1Line( fooType.validate( 'foo' ) ) )
+    console.log( pretty1Line( fooType.validate( 42 ) ) )
+    console.groupEnd()
+
+    // console.group( 'positiveType' )
+    // const positiveType = makeType<number>( value => {
+    //     if ( typeof value === 'number' ) {
+    //         return value > 0 || `${ value } not a positive number`
+    //     } else {
+    //         return `${ value } not a number`
+    //     }
+    // } )
+    // console.log( positiveType.validate( 42 ) ) // { data: 42 } 
+    // console.log( positiveType.validate( 0 ) ) // { errors: [ '0 not a positive number' ] }
+    // console.log( positiveType.validate( -42 ) ) // { errors: [ '-42 not a positive number' ] }
+    // console.log( positiveType.validate( 'hello' ) ) // { errors: [ 'hello not a number' ] }
+    // console.log( positiveType.validate( true ) ) // { errors: [ 'true not a number' ] }
+    // console.groupEnd()
 
     // const minLength3Type = makeStringType(
     //     value => value.length <= 3,

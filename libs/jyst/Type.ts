@@ -1,25 +1,60 @@
-// import { AnyObj, prune } from '@weis-guys/ts-utils'
-// import { prune } from '@weis-guys/ts-utils'
-import * as pkg from '@weis-guys/ts-utils'
-const { prune } = pkg
+// type AnyObj = Record<string, any>
 
-type AnyObj = Record<string, any>
+export type Type<Data> = {
+    params?: TypeParams
 
-export type Type<T> = {
-    validate: ( x: unknown ) => {
-        data?: T
-        error?: string
-    }
+    validate ( x: Data ): { data?: Data, errors?: string[] }
+    validate ( x: unknown ): { data?: Data, errors?: string[] }
+
+    addValidator<NewData> ( ...action: ValidatorAction<NewData> ):
+        Type<unknown extends NewData ? Data : NewData>
+
+    config: ( params: TypeParams ) => Type<Data>
 }
 
-export function makeType<T> ( validator: ( x: unknown ) => true | string ): Type<T> {
+type ValidatorAction<Data = any> = [
+    validator: ( x: Data ) => boolean,
+    errorBuilder?: ( x: unknown ) => string
+]
+
+const defaultErrorBuilder = ( x: unknown ) => `${ x } is not valid`
+
+type TypeParams = {
+    actions?: ValidatorAction[],
+    requiredPasses?: 'all' | 'some'
+}
+
+export function makeType<Data> ( params?: TypeParams ): Type<Data> {
     return {
+        params,
         validate ( x: unknown ) {
-            const result = validator( x )
-            const data = result === true ? x as T : undefined
-            const error = typeof result === 'string' ? result : undefined
-            return prune( { data, error } )
-            // return { data, error }
+            const result = params?.actions?.map( ( [ validator, errorBuilder ] ) => {
+                const isValid = validator( x as Data )
+                return {
+                    data: isValid
+                        ? x as Data
+                        : undefined,
+                    error: !isValid
+                        ? errorBuilder?.( x ) ?? defaultErrorBuilder( x )
+                        : undefined,
+                }
+            } )
+
+            const errors = result
+                ?.filter( r => r.error )
+                .map( r => r.error ) as string[]
+            if ( errors?.length ) return { errors }
+
+            return { data: x as Data }
+        },
+        addValidator<NewData> ( ...action: ValidatorAction<NewData> ) {
+            return makeType<( unknown extends NewData ? Data : NewData )>( {
+                ...params,
+                actions: [ ...params?.actions ?? [], action ],
+            } )
+        },
+        config ( params: TypeParams ) {
+            return makeType<Data>( params )
         }
     }
 }
@@ -44,17 +79,17 @@ export function makeType<T> ( validator: ( x: unknown ) => true | string ): Type
 // makeArrayType
 // makeTupleType
 
-export function makeObjType<T extends AnyObj> (
-    name: string,
-    shape: Record<keyof T, Type<T[ keyof T ]>>
-) {
-    return {
-        // validate ( x: unknown ) {
-        //     const result = validator( x )
-        //     return {
-        //         data: result ? x : undefined,
-        //         error: result ? undefined : `${ x } is not of type ${ name }`
-        //     }
-        // }
-    }
-}
+// export function makeObjType<T extends AnyObj> (
+//     name: string,
+//     shape: Record<keyof T, Type<T[ keyof T ]>>
+// ) {
+//     return {
+//         // validate ( x: unknown ) {
+//         //     const result = validator( x )
+//         //     return {
+//         //         data: result ? x : undefined,
+//         //         error: result ? undefined : `${ x } is not of type ${ name }`
+//         //     }
+//         // }
+//     }
+// }
