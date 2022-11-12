@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "start": "ts-node-esm ./index.ts",
+        "start": "ts-node-esm ./test.ts",
         "dev": "nodemon",
         "dev.cmd": "start cmd /k yarn dev"
     },
