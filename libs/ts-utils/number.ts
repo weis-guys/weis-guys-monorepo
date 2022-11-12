@@ -1,10 +1,9 @@
-import { toNumber } from 'lodash'
-import { is } from './is'
-import { NumberLike } from './types'
+import lodash from 'lodash'
+import { NumberLike, is } from '@weis-guys/ts-utils'
 
 export function makeNumber ( numberLike: NumberLike ): number {
-    if ( typeof numberLike == 'bigint' ) return toNumber( Number( numberLike ) )
-    return toNumber( numberLike )
+    if ( typeof numberLike == 'bigint' ) return lodash.toNumber( Number( numberLike ) )
+    return lodash.toNumber( numberLike )
 }
 
 export function toDollarsAndCents ( numberLike: NumberLike | undefined ): string | undefined {

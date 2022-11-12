@@ -1,18 +1,17 @@
-import { get, isObject, startCase } from 'lodash'
-import { colorize } from './colorize'
-import { AnyMap, AnyObj } from './types'
+import lodash from 'lodash'
+import { AnyObj, colorize } from '@weis-guys/ts-utils'
 
 export const findMatchingProps = ( obj: AnyObj, searchValue: string ): AnyObj => {
     const paths = findMatchingPaths( obj, searchValue )
     return Object.fromEntries(
-        paths.map( path => [ startCase( path ), get( obj, path ) ] )
+        paths.map( path => [ lodash.startCase( path ), lodash.get( obj, path ) ] )
     )
 }
 
 const findMatchingPaths = ( obj: AnyObj, searchValue: string ): string[] => {
     return Object.entries( obj )
         .map( ( [ key, value ] ) => {
-            if ( isObject( value ) ) {
+            if ( lodash.isObject( value ) ) {
                 const [ nextKey ] = findMatchingPaths( value, searchValue )
                 if ( nextKey ) return [ key, nextKey ].filter( Boolean ).join( '.' )
             }
@@ -77,7 +76,7 @@ function test () {
         paths.forEach( path => {
             console.log(
                 colorize( 'green' )( path ),
-                get( car, path )
+                lodash.get( car, path )
             )
         } )
     } )

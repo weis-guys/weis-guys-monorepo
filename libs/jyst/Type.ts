@@ -1,4 +1,4 @@
-// type AnyObj = Record<string, any>
+import { prune } from '@weis-guys/ts-utils/prune.js'
 
 export type Type<Data> = {
     params?: TypeParams

@@ -1,4 +1,4 @@
-import { getNextJSRuntimeConfig } from './nextjs/NextJSRuntimeConfig'
+// import { getNextJSRuntimeConfig } from './nextjs/NextJSRuntimeConfig'
 
 export type AppConfig = {
     name: string
@@ -8,12 +8,12 @@ export type AppConfig = {
 
 type AppType = typeof AppTypes[ number ]
 const AppTypes = [
-    'nextjs',
+    // 'nextjs',
 ] as const
 
 export function getAppConfig ( appType: AppType ): AppConfig {
     switch ( appType ) {
-        case 'nextjs': return getNextJSRuntimeConfig()
+        // case 'nextjs': return getNextJSRuntimeConfig()
 
         default: throw new Error( `\
 appType '${ appType }' is not supported.

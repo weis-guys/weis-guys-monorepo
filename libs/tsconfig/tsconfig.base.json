@@ -34,6 +34,11 @@
         "incremental": true,
         "resolveJsonModule": true
     },
+    "ts-node": {
+        "transpileOnly": true,
+        "files": true,
+        "experimentalResolver": true
+    },
     "include": [
         "src"
     ],

@@ -1,4 +1,7 @@
-import { AnyArray, AnyObj, Empty, EmptyArray, EmptyObj, Nullish, NumberLike, Primitive } from './types'
+import {
+    AnyArray, AnyObj, Empty, EmptyArray,
+    EmptyObj, Nullish, NumberLike, Primitive
+} from '@weis-guys/ts-utils'
 
 /* make sure to sort these with more specific above less specific */
 export const is = {

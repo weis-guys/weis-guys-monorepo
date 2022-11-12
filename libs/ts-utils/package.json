@@ -1,6 +1,7 @@
 {
     "name": "@weis-guys/ts-utils",
     "version": "0.0.0",
+    "type": "module",
     "devDependencies": {
         "@weis-guys/tsconfig": "*",
         "@types/node": "^17.0.12",

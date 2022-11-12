@@ -1,5 +1,5 @@
-import { AnyArray, AnyObj, is } from '.'
-import { isNil, negate, omitBy } from 'lodash'
+import { AnyArray, AnyObj, is } from '@weis-guys/ts-utils'
+import lodash from 'lodash'
 
 /**
  * removes all nullish values from an object or array
@@ -12,16 +12,16 @@ export const prune = <T> ( x: T ) => {
 }
 
 function pruneArray<T extends AnyArray> ( array: T ): T {
-    return array.filter( negate( isNil ) ) as T
+    return array.filter( lodash.negate( lodash.isNil ) ) as T
 }
 
 function prunePlainObj<T extends AnyObj> ( obj: T ): T {
-    return omitBy( obj, isNil ) as T
+    return lodash.omitBy( obj, lodash.isNil ) as T
 }
 
 function pruneClassInstance<T extends AnyObj> ( instance: T ): T {
     Object.keys( instance )
-        .filter( key => isNil( instance[ key ] ) )
+        .filter( key => lodash.isNil( instance[ key ] ) )
         .forEach( key => delete instance[ key ] )
     return instance
 }

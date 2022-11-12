@@ -1,4 +1,4 @@
-import { Replacer } from './Replacer'
+import { Replacer } from '@weis-guys/ts-utils'
 
 export const makeCircularReplacer = (): Replacer => {
     const seen = new WeakSet()

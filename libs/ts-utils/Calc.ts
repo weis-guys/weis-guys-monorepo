@@ -1,5 +1,5 @@
-import { is } from './is'
-import { PureFn, MapTupleOptional } from './types'
+import { is } from './is.js'
+import { PureFn, MapTupleOptional } from '@weis-guys/ts-utils'
 
 export const makeCalc = <Fn extends PureFn> ( fn: Fn ) =>
     ( ...args: MapTupleOptional<Parameters<Fn>> ): ReturnType<Fn> | undefined => {

@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid'
-import { colorize } from './colorize'
+import { colorize } from '@weis-guys/ts-utils'
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 const sizeMap = {

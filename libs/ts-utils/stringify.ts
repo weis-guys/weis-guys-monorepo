@@ -1,5 +1,5 @@
-import { makeCircularReplacer } from './CircularReplacer'
-import { Replacer } from './Replacer'
+import { makeCircularReplacer } from '@weis-guys/ts-utils'
+import { Replacer } from '@weis-guys/ts-utils'
 
 export const stringify = x => JSON.stringify( x, stringifyReplacer() )
 
